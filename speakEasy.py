@@ -36,13 +36,15 @@ def tokenize(command):
 	return nltk.word_tokenize(command)
 
 def run(fileName):
-	if(".py" in fileName and (".c" and ".java" not in fileName)):
+	if(".py" in fileName and (".c" and ".java" and ".cpp" not in fileName)):
 		print("Hello")
 		runPython(fileName)
-	if(".c" in fileName and (".py" and ".java" not in fileName)):
+	if(".c" in fileName and (".py" and ".java" and ".cpp"  not in fileName)):
 		runC(fileName)
-	if(".java" in fileName and(".py" and ".c" not in fileName)):
+	if(".java" in fileName and(".py" and ".c" and ".cpp" not in fileName)):
 		runJava(fileName)
+	if(".cpp" in fileName and(".py" and ".c" and ".java" not in fileName)):
+		runCpp(fileName)
 
 def runPython(fileName):
 	subprocess.call("python3 {}".format(fileName), shell = True)	
@@ -56,6 +58,11 @@ def runC(fileName):
 def runJava(fileName):
 	subprocess.call("javac {}".format(fileName),shell = True)
 	subprocess.call("java {}".format(fileName[:-5]), shell = True)
+
+def runCpp(fileName):
+	subprocess.call("g++ {0} -o {1}".format(fileName, fileName[:-4]), shell = True)
+	subprocess.call("./{}".format(fileName[:-4]), shell = True)
+
 def processor(command):
 	tokens = tokenize(command)
 	firstWord = tokens[0]

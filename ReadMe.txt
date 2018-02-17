@@ -4,4 +4,7 @@ delete folder xxx (rmdir xxx)
 delete file xxx (rm ./xxx)
 make folder xxx (mkdir xxx)
 make file xxx (touch xxx)
-
+run xxx.py (python3 xxx.py)
+run xxx.c (gcc -Wall xxx.c -o xxx, ./xxx)
+run xxx.java (javac xxx.java, java xxx)
+run xxx.cpp (g++ xxx.cpp -o xxx, ./xxx)
