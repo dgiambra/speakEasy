@@ -4,113 +4,108 @@ import nltk
 class REPL:
 
 	def __init__(self, library, system):
-		self._library = library
+		self._library = {
+		'list':self.list,
+		'delete':{'file': self.removeFile,'folder' : self.removeFolder} ,
+		'make': {'file' : self.makeFile, 'folder' : self.makeFolder},
+		'run':self.run,
+
+		}
+
 		self._core_commands = system
 		self._history = []
 		self._gloss = None
+		self._loop = True
 
 
 	def loop(self):
 		print("Welcome!")
-		while True:
+		while self._loop:
 			try:
-				scan = str(input('SE >> '))
-				processor(scan)
-				print(output)
+				scan = str(input('Enter a Command >> '))
+				self.processor(scan)
+
 			except Exception as e:
 				print("Error..."+str(e))
 
-	def list():
+	def list(self):
 		subprocess.call(["ls", "-a"])
 
-	def remove(type, name):
+	def remove(self, type, name):
 		if(type == "folder"):
-			removeFolder(name)
+			self.removeFolder(name)
 		if(type == "file"):
-			removeFile(name)
+			self.removeFile(name)
 
-	def removeFile(file):
+	def removeFile(self, file):
 		subprocess.call("rm ./{}".format(file), shell=True)
 
-	def removeFolder(folder):
+	def removeFolder(self, folder):
 		subprocess.call("rmdir {}".format(folder), shell = True)
 
-	def make(type, name):
+	def make(self, type, name):
 		if(type == "folder"):
-			makeFolder(name)
+			self.makeFolder(name)
 		if(type == "file"):
-			makeFile(name)
+			self.makeFile(name)
 
-	def makeFolder(name):
+	def makeFolder(self, name):
 		subprocess.call("mkdir {}".format(name), shell = True)
 
-	def makeFile(name):
+	def makeFile(self, name):
 		subprocess.call("touch {}".format(name), shell = True)	
 
-	def tokenize(command):
+	def tokenize(self, command):
 		return nltk.word_tokenize(command)
 
-	def run(fileName):
+	def run(self, fileName):
 		if(".py" in fileName and (".c" and ".java" and ".cpp" not in fileName)):
-			print("Hello")
-			runPython(fileName)
+			#print("Hello")
+			self.runPython(fileName)
 		if(".c" in fileName and (".py" and ".java" and ".cpp"  not in fileName)):
-			runC(fileName)
+			self.runC(fileName)
 		if(".java" in fileName and(".py" and ".c" and ".cpp" not in fileName)):
-			runJava(fileName)
+			self.runJava(fileName)
 		if(".cpp" in fileName and(".py" and ".c" and ".java" not in fileName)):
-			runCpp(fileName)
+			self.runCpp(fileName)
 
-	def runPython(fileName):
+	def runPython(self, fileName):
 		subprocess.call("python3 {}".format(fileName), shell = True)	
 			
 
-	def runC(fileName):
+	def runC(self, fileName):
 		subprocess.call("gcc -Wall {0} -o {1}".format(fileName, fileName[:-2]),shell = True)
 		subprocess.call("./{}".format(fileName[:-2]), shell = True)
 
 
-	def runJava(fileName):
+	def runJava(self, fileName):
 		subprocess.call("javac {}".format(fileName),shell = True)
 		subprocess.call("java {}".format(fileName[:-5]), shell = True)
 
-	def runCpp(fileName):
+	def runCpp(self, fileName):
 		subprocess.call("g++ {0} -o {1}".format(fileName, fileName[:-4]), shell = True)
 		subprocess.call("./{}".format(fileName[:-4]), shell = True)
 
-	def processor(command):
-		tokens = tokenize(command)
+	def processor(self, command):
+		tokens = self.tokenize(command)
 		firstWord = tokens[0]
-		##print(firstWord)
-		if (firstWord =="list"):
-			##print("true")
-			list()
-		if (firstWord == "delete"):
-			for x in tokens:
-				if(x == "folder"):
-					type = "folder"
-					index = tokens.index(x)
-				if (x == "file"):
-					type = "file"
-					index = tokens.index(x)
-			remove(type, tokens[index + 1])	
-		if (firstWord == "make"):
-			for x in tokens:
-				if (x == "folder"):
-					type = "folder"
-					index = tokens.index(x)
-				if (x == "file"):
-					type = "file"
-					index = tokens.index(x)
-			make(type, tokens[index + 1])
-		if (firstWord == "run"):
-			run(tokens[1])
-
-
+		if (firstWord == "make" or "delete"):
+			self._library[firstWord][tokens[1](tokens[2])
+		elif (firstWord == "run"):
+			self._library[firstWord](tokens[1])
+		elif (firstWord =="list"):
+			self._library[firstWord]()
+			
+		if (firstWord == "quit"):
+			self._loop = False
 def main():
 	
 	library = {
-		'cd':[]
+		'list':self.list,
+		'delete':{'file': self.removeFile,'folder' : self.removeFolder} ,
+		'make': {'file' : self.makeFile, 'folder' : self.makeFolder},
+		'run':self.run,
+
 	}
 
 	system = {
