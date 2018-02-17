@@ -22,10 +22,12 @@ def processor(command):
 	if (firstWord =="list"):
 		##print("true")
 		list()
-	
+	if (firstWord == "delete"):
+		file = tokens[1]
+		remove(file)	
 def speakEasy():
 	command = getCommand()
 	processor(command)
 
-##speakEasy()
-remove("test.txt")
+speakEasy()
+
