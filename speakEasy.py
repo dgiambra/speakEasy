@@ -45,13 +45,17 @@ def run(fileName):
 		runJava(fileName)
 
 def runPython(fileName):
-	subprocess.call("python {}".format(fileName), shell = True)	
+	subprocess.call("python3 {}".format(fileName), shell = True)	
 		
 
 def runC(fileName):
-	return True
+	subprocess.call("gcc -Wall {0} -o {1}".format(fileName, fileName[:-2]),shell = True)
+	subprocess.call("./{}".format(fileName[:-2]), shell = True)
+
+
 def runJava(fileName):
-	return True
+	subprocess.call("javac {}".format(fileName),shell = True)
+	subprocess.call("java {}".format(fileName[:-5]), shell = True)
 def processor(command):
 	tokens = tokenize(command)
 	firstWord = tokens[0]
