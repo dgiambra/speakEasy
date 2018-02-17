@@ -35,6 +35,22 @@ def makeFile(name):
 def tokenize(command):
 	return nltk.word_tokenize(command)
 
+def run(fileName):
+	if(".py" in fileName and (".c" and ".java" not in fileName)):
+		runPython(fileName)
+	if(".c" in fileName and (".py" and ".java" not in fileName)):
+		runC(fileName)
+	if(".java" in fileName and(".py" and ".c" not in fileName)):
+		runJava(fileName)
+
+def runPython(fileName):
+	fileName	
+		
+
+def runC(fileName):
+	return True
+def runJava(fileName):
+	return True
 def processor(command):
 	tokens = tokenize(command)
 	firstWord = tokens[0]
