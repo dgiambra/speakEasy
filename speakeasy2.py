@@ -21,12 +21,12 @@ class REPL:
 	def loop(self):
 		print("Welcome!")
 		while self._loop:
-			try:
-				scan = str(input('Enter a Command >> '))
-				self.processor(scan)
+			##try:
+			scan = str(input('Enter a Command >> '))
+			self.processor(scan)
 
-			except Exception as e:
-				print("Error..."+str(e))
+			##except Exception as e:
+				##print("Error..."+str(e))
 
 	def list(self):
 		subprocess.call(["ls", "-a"])
@@ -70,8 +70,8 @@ class REPL:
 			self.runCpp(fileName)
 
 	def runPython(self, fileName):
-		subprocess.call("python3 {}".format(fileName), shell = True)	
-			
+		subprocess.call("python3 {}".format(fileName), shell = True)
+
 
 	def runC(self, fileName):
 		subprocess.call("gcc -Wall {0} -o {1}".format(fileName, fileName[:-2]),shell = True)
@@ -89,24 +89,18 @@ class REPL:
 	def processor(self, command):
 		tokens = self.tokenize(command)
 		firstWord = tokens[0]
-		if (firstWord == "make" or "delete"):
-			self._library[firstWord][tokens[1](tokens[2])
-		elif (firstWord == "run"):
+		if (firstWord == ("make" or "delete")):
+			self._library[firstWord][tokens[1]](tokens[2])
+		elif firstWord == "run":
 			self._library[firstWord](tokens[1])
-		elif (firstWord =="list"):
+		elif firstWord =="list":
 			self._library[firstWord]()
 			
 		if (firstWord == "quit"):
 			self._loop = False
 def main():
 	
-	library = {
-		'list':self.list,
-		'delete':{'file': self.removeFile,'folder' : self.removeFolder} ,
-		'make': {'file' : self.makeFile, 'folder' : self.makeFolder},
-		'run':self.run,
-
-	}
+	library = {}
 
 	system = {
 		'exit':['exit','leave','go away']
