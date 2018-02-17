@@ -37,6 +37,7 @@ def tokenize(command):
 
 def run(fileName):
 	if(".py" in fileName and (".c" and ".java" not in fileName)):
+		print("Hello")
 		runPython(fileName)
 	if(".c" in fileName and (".py" and ".java" not in fileName)):
 		runC(fileName)
@@ -44,7 +45,7 @@ def run(fileName):
 		runJava(fileName)
 
 def runPython(fileName):
-	fileName	
+	subprocess.call("python {}".format(fileName), shell = True)	
 		
 
 def runC(fileName):
@@ -76,7 +77,8 @@ def processor(command):
 				type = "file"
 				index = tokens.index(x)
 		make(type, tokens[index + 1])
-
+	if (firstWord == "run"):
+		run(tokens[1])
 
 
 def speakEasy():
