@@ -1,2 +1,3 @@
-import gui
-gui
+text = input("Enter your name: ")
+print(text)
+
