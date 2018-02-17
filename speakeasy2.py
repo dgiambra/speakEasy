@@ -12,11 +12,15 @@ class REPL:
 
 		}
 
-		self._core_commands = system
+		self._translations = system
 		self._history = []
 		self._gloss = None
 		self._loop = True
 
+	def translator(self, word):
+		for i in self._translations:
+			if word in system[i]:
+				return i
 
 	def loop(self):
 		print("Welcome!")
@@ -88,14 +92,13 @@ class REPL:
 
 	def processor(self, command):
 		tokens = self.tokenize(command)
-		firstWord = tokens[0]
+		firstWord = self.translator(tokens[0])
 		if (firstWord == ("make" or "delete")):
 			self._library[firstWord][tokens[1]](tokens[2])
 		elif firstWord == "run":
 			self._library[firstWord](tokens[1])
 		elif firstWord =="list":
 			self._library[firstWord]()
-			
 		if (firstWord == "quit"):
 			self._loop = False
 def main():
@@ -103,7 +106,9 @@ def main():
 	library = {}
 
 	system = {
-		'exit':['exit','leave','go away']
+		'exit':['exit','leave'],
+		'make':['make','create'],
+		'delete':['delete', 'remove', destroy]
 	}
 
 	r = REPL(library=library, system=system)
