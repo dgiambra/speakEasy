@@ -9,7 +9,7 @@ class REPL:
 		'delete':{'file': self.removeFile,'folder' : self.removeFolder} ,
 		'make': {'file' : self.makeFile, 'folder' : self.makeFolder},
 		'run':self.run,
-
+		'locate': self.locate
 		}
 
 		self._translations = system
@@ -19,8 +19,10 @@ class REPL:
 
 	def translator(self, word):
 		for i in self._translations:
-			if word in system[i]:
+			if word in self._translations[i]:
 				return i
+			else:
+				return word
 
 	def loop(self):
 		print("Welcome!")
@@ -93,22 +95,30 @@ class REPL:
 	def processor(self, command):
 		tokens = self.tokenize(command)
 		firstWord = self.translator(tokens[0])
-		if (firstWord == ("make" or "delete")):
+		print(firstWord)
+		if (firstWord in ("make" , "delete")):
 			self._library[firstWord][tokens[1]](tokens[2])
-		elif firstWord == "run":
+		elif (firstWord in ("run" , "locate")):
+			print('but')
 			self._library[firstWord](tokens[1])
-		elif firstWord =="list":
+		elif (firstWord =="list"):
 			self._library[firstWord]()
-		if (firstWord == "quit"):
+		elif (firstWord == "exit"):
+			print('love')
 			self._loop = False
+	def locate(self, fileName):
+		#print("locate -b '\{}'".format(fileName))
+		subprocess.call("locate -s '/{}'".format(fileName),shell = True)
+		#print(output)
 def main():
 	
 	library = {}
 
 	system = {
-		'exit':['exit','leave'],
+		'exit':['exit','leave', 'quit'],
 		'make':['make','create'],
-		'delete':['delete', 'remove', destroy]
+		'delete':['delete', 'remove', 'destroy']
+		'locate':['locate','search','find']
 	}
 
 	r = REPL(library=library, system=system)
