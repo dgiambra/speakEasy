@@ -154,7 +154,14 @@ class REPL:
 	'''
 		subprocess.call("g++ {0} -o {1}".format(fileName, fileName[:-4]), shell = True)
 		subprocess.call("./{}".format(fileName[:-4]), shell = True)
-
+		
+	def runRuby(self, fileName):
+	'''a function to run a ruby executable
+	
+	Args:
+	fileName(str) -- name of executable
+	'''
+		subprocess.call("ruby {}".format(fileName), shell = True)
 	def processor(self, command):
 	'''Novel 'Language Processing' Algorithm
 	

@@ -64,7 +64,7 @@ To remove a folder enter the words "remove folder" followed by the folder name. 
 Enter a Command >> remove folder hello
 ```
 
-#### Run an Executable (.c, .py, .cpp, and .java)
+#### Run an Executable (.c, .py, .cpp, .rb,  and .java)
 One of the most novel features in this interface is the ability to compile and run multiple types of programs with a simple command.
 ```
 Enter a Command >> run hello.py
@@ -76,7 +76,10 @@ Enter a Command >> run hello.c
 Enter a Command >> run hello.cpp
 ```
 ```
-Enter a command >> run hello.java
+Enter a Command >> run hello.java
+```
+```
+Enter a Command >> run helo.rb
 ```
 
 #### Locate a File or Folder
