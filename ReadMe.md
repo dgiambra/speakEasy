@@ -89,3 +89,6 @@ Enter the name of a folder or directory to move to that directory. Note, only th
 ```
 Enter a Command >> move Hackathon18
 ````
+
+### Demo Programs
+All files besides the speakEasy.py, speakEasy_OLDSTABLE.py, and ReadMe.md are demo files. All of them can be compiled and run from the Interface, including the GUI.
