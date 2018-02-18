@@ -15,7 +15,7 @@ If your Python 3 path variable is not python3 but instead python, enter the foll
 python speakEasy.py
 ```
 Note: If you do not have the python3 path variable the interface will be unable to run other python scripts.
-```
+
 ### Prerequisites
 
 The following programs will be needed:
