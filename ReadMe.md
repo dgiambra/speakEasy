@@ -101,6 +101,9 @@ Enter a Command >> exit
 ### Demo Programs
 All files besides the speakEasy.py, speakEasy_OLDSTABLE.py, and ReadMe.md are demo files. All of them can be compiled and run from the Interface, including the GUI.
 
+### Future Engine
+This code has not been implemented as of version 1.0. This is a proof of concept custom entity recognizer custom built for command line syntax.
+
 ### Alternative commands
 The following commands can be subbed in with no loss in functionality.
 * exit
