@@ -20,13 +20,12 @@ class REPL:
 		self._loop = True
 
 	def translator(self, word):
-	'''convert command into intent, uses a dictionary of synonyms to translate 
-	Args:
-	word(str) -- the word to translate
-	
-	Return:
-	word(str) -- word translated to intent
-	'''
+		'''convert command into intent, uses a dictionary of synonyms to translate 
+		Args:
+		word(str) -- the word to translate
+		
+		Return:
+		word(str) -- word translated to intent '''
 		for i in self._translations:
 			if word in self._translations[i]:
 				return i
@@ -34,8 +33,7 @@ class REPL:
 				return word
 
 	def loop(self):
-	'''loop to keep command prompt open and take input
-	'''
+		'''loop to keep command prompt open and take input'''
 		print("Welcome!")
 		while self._loop:
 			try:
@@ -46,68 +44,59 @@ class REPL:
 				print("Error..."+str(e))
 
 	def list(self):
-	'''function to list contents of current directory
-	'''
+		'''function to list contents of current directory'''
 		subprocess.call(["ls", "-a"])
 
 	def remove(self, type, name):
-	'''a splitter function to differentiate between file and folder removal
-	
-	Args:
-	type(str) -- file or folder
-	name(str) -- file or folder name
-	'''
+		'''a splitter function to differentiate between file and folder removal
+		
+		Args:
+		type(str) -- file or folder
+		name(str) -- file or folder name'''
 		if(type == "folder"):
 			self.removeFolder(name)
 		if(type == "file"):
 			self.removeFile(name)
 
 	def removeFile(self, file):
-	''' function to remove file
-	'''
+		''' function to remove file'''
 		subprocess.call("rm ./{}".format(file), shell=True)
 
 	def removeFolder(self, folder):
-	'''function to remove folder
-	'''
+		'''function to remove folder'''
 		subprocess.call("rmdir {}".format(folder), shell = True)
 
 	def make(self, type, name):
-	'''a splitter function to differentiate between file and folder creation
-	
-	Args:
-	type(str) -- file or folder
-	name(str) -- file or folder name
-	'''
+		'''a splitter function to differentiate between file and folder creation
+		
+		Args:
+		type(str) -- file or folder
+		name(str) -- file or folder name'''
 		if(type == "folder"):
 			self.makeFolder(name)
 		if(type == "file"):
 			self.makeFile(name)
 
 	def makeFolder(self, name):
-	'''a function to make a folder
-	'''
+		'''a function to make a folder'''
 		subprocess.call("mkdir {}".format(name), shell = True)
 
 	def makeFile(self, name):
-	'''a function to make a file
-	'''
+		'''a function to make a file'''
 		subprocess.call("touch {}".format(name), shell = True)	
 
 	def tokenize(self, command):
-	'''a function to split a word into its tokens (words)
-	
-	Returns:
-	tokens(List[str]) -- a list of words input
-	'''
+		'''a function to split a word into its tokens (words)
+		
+		Returns:
+		tokens(List[str]) -- a list of words input'''
 		return nltk.word_tokenize(command)
 
 	def run(self, fileName):
-	'''a splitting function to determine file type for execution
-	
-	Args:
-	fileName(str) -- name of executable
-	'''
+		'''a splitting function to determine file type for execution
+		
+		Args:
+		fileName(str) -- name of executable'''
 		if(".py" in fileName and (".c" and ".java" and ".cpp" not in fileName)):
 			#print("Hello")
 			self.runPython(fileName)
@@ -119,55 +108,49 @@ class REPL:
 			self.runCpp(fileName)
 
 	def runPython(self, fileName):
-	'''a function to run a python3 executable
-	
-	Args:
-	fileName(str) -- name of executable
-	'''
+		'''a function to run a python3 executable
+		
+		Args:
+		fileName(str) -- name of executable'''
 		subprocess.call("python3 {}".format(fileName), shell = True)
 
 
 	def runC(self, fileName):
-	'''a function to compile and run a c executable
-	
-	Args:
-	fileName(str) -- name of executable
-	'''
+		'''a function to compile and run a c executable
+		
+		Args:
+		fileName(str) -- name of executable'''
 		subprocess.call("gcc -Wall {0} -o {1}".format(fileName, fileName[:-2]),shell = True)
 		subprocess.call("./{}".format(fileName[:-2]), shell = True)
 
 
 	def runJava(self, fileName):
-	'''a function to compile and run a Java executable
-	
-	Args:
-	fileName(str) -- name of executable
-	'''
+		'''a function to compile and run a Java executable
+		
+		Args:
+		fileName(str) -- name of executable'''
 		subprocess.call("javac {}".format(fileName),shell = True)
 		subprocess.call("java {}".format(fileName[:-5]), shell = True)
 
 	def runCpp(self, fileName):
-	'''a function to compile and run a C++ executable
-	
-	Args:
-	fileName(str) -- name of executable
-	'''
+		'''a function to compile and run a C++ executable
+		
+		Args:
+		fileName(str) -- name of executable'''
 		subprocess.call("g++ {0} -o {1}".format(fileName, fileName[:-4]), shell = True)
 		subprocess.call("./{}".format(fileName[:-4]), shell = True)
 		
 	def runRuby(self, fileName):
-	'''a function to run a ruby executable
-	
-	Args:
-	fileName(str) -- name of executable
-	'''
+		'''a function to run a ruby executable
+		
+		Args:
+		fileName(str) -- name of executable'''
 		subprocess.call("ruby {}".format(fileName), shell = True)
 	def processor(self, command):
-	'''Novel 'Language Processing' Algorithm
-	
-	Args:
-	command(str) -- command text
-	'''
+		'''Novel 'Language Processing' Algorithm
+		
+		Args:
+		command(str) -- command text'''
 		tokens = self.tokenize(command)
 		firstWord = self.translator(tokens[0])
 		#print(firstWord)
@@ -183,21 +166,19 @@ class REPL:
 			self._loop = False
 
 	def locate(self, fileName):
-	'''a function to locate a file or folder 
-	
-	Args:
-	fileName(str) -- name of file or folder to locate
-	'''
+		'''a function to locate a file or folder 
+		
+		Args:
+		fileName(str) -- name of file or folder to locate'''
 		#print("locate -b '\{}'".format(fileName))
 		subprocess.call("locate -b '\{}'".format(fileName),shell = True)
 		#print(output)
 
 	def move(self, fileName):
-	'''a function to move the current working directory
-	
-	Args:
-	fileName(str) -- directory to enter
-	'''
+		'''a function to move the current working directory
+		
+		Args:
+		fileName(str) -- directory to enter'''
 		output = subprocess.check_output("locate -bc '\{}'".format(fileName), shell = True)
 		output = int(output[:-1])
 		if output == 1:
