@@ -42,6 +42,7 @@ class REPL:
 		while self._loop:
 			try:
 				scan = str(input('Enter a Command >> ')) #Get command
+				print(scan)
 				self.processor(scan)                     #Process command
 
 			except Exception as e:
