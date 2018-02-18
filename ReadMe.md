@@ -19,15 +19,15 @@ Note: If you do not have the python3 path variable the interface will be unable 
 ### Prerequisites
 
 The following programs will be needed:
-*gcc (to compile C programs)
-*g++ (to compile C++)
-*default-javardk (to compile JAVA programs)
-*Python 3
+* gcc (to compile C programs)
+* g++ (to compile C++)
+* default-javardk (to compile JAVA programs)
+* Python 3
 
 The following python packages will be needed:
-*NLTK
-*subprocess
-*os
+* NLTK
+* subprocess
+* os
 
 
 ### Instructions
