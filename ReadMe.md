@@ -90,5 +90,28 @@ Enter the name of a folder or directory to move to that directory. Note, only th
 Enter a Command >> move Hackathon18
 ````
 
+#### Exit
+To quit, type exit.
+```
+Enter a Command >> exit
+```
 ### Demo Programs
 All files besides the speakEasy.py, speakEasy_OLDSTABLE.py, and ReadMe.md are demo files. All of them can be compiled and run from the Interface, including the GUI.
+
+### Alternative commands
+The following commands can be subbed in with no loss in functionality.
+* exit
+	* exit
+	* leave
+	* quit
+* make
+	* make
+	* create
+* delete
+	* delete
+	* remove
+	* destroy
+* locate
+	* locate
+	* search
+	* find
