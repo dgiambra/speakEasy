@@ -1,3 +1,6 @@
+#This is the Source code for the 2018 DandyHacks project speakEasy
+#Dominic Giambra
+#Tyler Knight
 import subprocess
 import nltk
 from os import chdir
