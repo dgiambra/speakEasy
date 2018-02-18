@@ -106,6 +106,8 @@ class REPL:
 			self.runJava(fileName)
 		if(".cpp" in fileName and(".py" and ".c" and ".java" not in fileName)):
 			self.runCpp(fileName)
+		if(".rb" in fileName):
+			self.runRuby(fileName)
 
 	def runPython(self, fileName):
 		'''a function to run a python3 executable
@@ -145,6 +147,7 @@ class REPL:
 		
 		Args:
 		fileName(str) -- name of executable'''
+		#print("huh")
 		subprocess.call("ruby {}".format(fileName), shell = True)
 	def processor(self, command):
 		'''Novel 'Language Processing' Algorithm
