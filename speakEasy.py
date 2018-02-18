@@ -27,10 +27,11 @@ class REPL:
 		Return:
 		word(str) -- word translated to intent '''
 		for i in self._translations:
+			#print(i)
 			if word in self._translations[i]:
 				return i
-			else:
-				return word
+			
+		return word
 
 	def loop(self):
 		'''loop to keep command prompt open and take input'''
@@ -165,7 +166,7 @@ class REPL:
 		elif (firstWord =="list"):
 			self._library[firstWord]()
 		elif (firstWord == "exit"):
-			print('love')
+			#print('love')
 			self._loop = False
 
 	def locate(self, fileName):
@@ -201,7 +202,8 @@ def main():
 		'exit':['exit','leave', 'quit'],            #This is an editable "dictionary" 
 		'make':['make','create'],                   #Keys are intents
 		'delete':['delete', 'remove', 'destroy'],   #Values or synonyms that will trigger intent
-		'locate':['locate','search','find']
+		'locate':['locate','search','find'],
+		'list':['list','show','display']
 	}
 
 	r = REPL(library=library, system=system)
