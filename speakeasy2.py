@@ -1,5 +1,6 @@
 import subprocess
 import nltk
+from os import chdir
 
 class REPL:
 
@@ -9,7 +10,8 @@ class REPL:
 		'delete':{'file': self.removeFile,'folder' : self.removeFolder} ,
 		'make': {'file' : self.makeFile, 'folder' : self.makeFolder},
 		'run':self.run,
-		'locate': self.locate
+		'locate': self.locate,
+		'move':self.move
 		}
 
 		self._translations = system
@@ -95,11 +97,11 @@ class REPL:
 	def processor(self, command):
 		tokens = self.tokenize(command)
 		firstWord = self.translator(tokens[0])
-		print(firstWord)
+		#print(firstWord)
 		if (firstWord in ("make" , "delete")):
 			self._library[firstWord][tokens[1]](tokens[2])
-		elif (firstWord in ("run" , "locate")):
-			print('but')
+		elif (firstWord in ("run" , "locate", "move")):
+			#print('but')
 			self._library[firstWord](tokens[1])
 		elif (firstWord =="list"):
 			self._library[firstWord]()
@@ -108,8 +110,18 @@ class REPL:
 			self._loop = False
 	def locate(self, fileName):
 		#print("locate -b '\{}'".format(fileName))
-		subprocess.call("locate -s '/{}'".format(fileName),shell = True)
+		subprocess.call("locate -b '\{}'".format(fileName),shell = True)
 		#print(output)
+	def move(self, fileName):
+		output = subprocess.check_output("locate -bc '\{}'".format(fileName), shell = True)
+		output = int(output[:-1])
+		if output == 1:
+			op = subprocess.check_output("locate -b '\{}'".format(fileName), shell = True)
+			#print(str(op[:-1]))
+			string = str(op)[2:-3]
+			chdir(string)	
+		else:
+			print("Unable to locate {}".format(fileName))	
 def main():
 	
 	library = {}
@@ -117,7 +129,7 @@ def main():
 	system = {
 		'exit':['exit','leave', 'quit'],
 		'make':['make','create'],
-		'delete':['delete', 'remove', 'destroy']
+		'delete':['delete', 'remove', 'destroy'],
 		'locate':['locate','search','find']
 	}
 
